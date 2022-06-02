@@ -58,7 +58,7 @@ app.put("/bookmark/:id", async (req, res) => {
 })
 
 // CREATE ROUTE
-app.post("/bookmark/:id", async (req, res) => {
+app.post("/bookmark", async (req, res) => {
     try {
       res.json(await Bookmarks.create(req.body));
     } catch (error) {
