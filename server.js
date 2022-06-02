@@ -15,10 +15,17 @@ mongoose.connection
     .on("open", () => console.log("MongoDB connected"))
     .on("close", () => console.log("MongoDB disconnected"))
     .on("error", (error) => console.log(error))
-    
 
+const BookmarksSchema = new mongoose.Schema({
+    title: String,
+    url: String
+})
 
+const Bookmarks = mongoose.model("Bookmarks", BookmarksSchema)
 
+app.get("/", (req, res) => {
+    res.send("testing testing one two three")
+})
 
 
 app.listen(PORT, () => console.log(`We are listening on PORT ${PORT}`))
