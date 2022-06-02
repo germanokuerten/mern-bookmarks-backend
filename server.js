@@ -26,6 +26,24 @@ const Bookmarks = mongoose.model("Bookmarks", BookmarksSchema)
 app.get("/", (req, res) => {
     res.send("testing testing one two three")
 })
+// INDEX ROUTE
+app.get("/bookmark", async (req, res) => {
+    try {
+        res.json(await (await Bookmarks.find({})).reverse()) //Adds bookmark to top of list
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
 
+// DELETE ROUTE
+app.delete("/bookmark/:id", async (req, res) => {
+    try {
+        res.json(await Bookmarks.findByIdAndDelete(req.params.id))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+// UPDATE ROUTE
 
 app.listen(PORT, () => console.log(`We are listening on PORT ${PORT}`))
