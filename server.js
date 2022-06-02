@@ -45,5 +45,27 @@ app.delete("/bookmark/:id", async (req, res) => {
 })
 
 // UPDATE ROUTE
+app.put("/bookmark/:id", async (req, res) => {
+    try {
+      res.json(
+        await Bookmarks.findByIdAndUpdate(req.params.id, req.body, {
+          new: true,
+        })
+      );
+    } catch (error) {
+      res.status(400).json(error);
+    }
+})
+
+// CREATE ROUTE
+app.post("/bookmark/:id", async (req, res) => {
+    try {
+      res.json(await Bookmarks.create(req.body));
+    } catch (error) {
+      res.status(400).json(error);
+    }
+})
+
+
 
 app.listen(PORT, () => console.log(`We are listening on PORT ${PORT}`))
