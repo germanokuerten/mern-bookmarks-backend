@@ -1,10 +1,21 @@
 require("dotenv").config()
-const { PORT = 3031, DATATBASE_URL }=process.env
+const { PORT = 3031, DATABASE_URL }=process.env
 const express = require("express")
 const mongoose = require("mongoose")
 const morgan = require("morgan")
 const cors = require("cors")
 const app = express()
+
+app.use(cors())
+app.use(morgan("dev"))
+app.use(express.json())
+
+mongoose.connect(DATABASE_URL)
+mongoose.connection
+    .on("open", () => console.log("MongoDB connected"))
+    .on("close", () => console.log("MongoDB disconnected"))
+    .on("error", (error) => console.log(error))
+    
 
 
 
